@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To Do List</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <!-- 為了讓flash訊息出現在下一個Action中，在Template中讀取到這個訊息，通常會放flash在Layout中： -->
+    <div class="container">
+      <p class="text-info bg-info"><%= flash[:notice] %></p>
+      <p class="text-warning bg-warning"><%= flash[:alert] %></p>
+    </div>
+    <%= yield %>
+    
+  </body>
+</html>

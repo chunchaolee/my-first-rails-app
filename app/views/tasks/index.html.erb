@@ -1,0 +1,33 @@
+<!-- 運用ERb引擎標籤嵌入html & ruby程式碼 --> 
+<!-- 接下來我們來試試看優化 index 頁面，將原本條列式的呈現方式，改用表單來呈現。 -->
+<div class="container">
+  <table class="table table-striped table-condensed">
+  
+    <tr>
+      <th>Status</th> 
+      <th>Task</th>
+      <th>Due Date</th>
+      <th>Details</th>
+      <th>Edit</th>
+    <th>Delete</th>
+    </tr>
+
+    <% @tasks.each do |task| %>
+      <tr>
+            <td><input type="checkbox"></td>
+            <td><%= task.name %></td>
+            <td><%= task.date %></td>
+            <td><%= link_to "<span class='glyphicon glyphicon-open-file'></span>  Show".html_safe, task_path(task), class: "btn btn-info" %></td>
+            <td><%= link_to "<span class='glyphicon glyphicon-edit'></span>  Edit".html_safe, edit_task_path(task), class: "btn btn-default" %></td>
+            <td><%= link_to "<span class='glyphicon glyphicon-remove-sign'></span>  Destroy".html_safe, task_path(task), class: "btn btn-danger", method: :delete, data:{ confirm: "WARNING: Are you sure?"} %></td>
+      </tr>
+    <% end %>
+  </table>
+  
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span>  New Task".html_safe, new_task_path, class: "btn btn-primary" %>
+  
+  <h3>使用說明</h3>
+      <p>註1: 一般user只能瀏覽主頁跟各個task的detail</p>
+      <p>註2: 只有admin能Edit跟Destroy</p>
+      <p>註3: 如果 due date 已經過期，就不能再刪除該task</p>
+</div>

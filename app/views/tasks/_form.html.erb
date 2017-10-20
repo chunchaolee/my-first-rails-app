@@ -1,0 +1,37 @@
+<!-- 使用局部頁面 (partial) 來建立統一的模版 (template)，讓不同的檔案能直接讀取同一個 template。 -->
+
+<!-- 加上以下程式碼，提供了印出錯誤訊息的方法給new.html.erb 和 edit.html.erb -->
+<% if @task.errors.present? %>
+  <ol>
+    <% @task.errors.each do |error, message| %>
+      <li>WARNING:  <%= "#{error.capitalize}  #{message}" %></li>
+    <% end %>
+  </ol>
+<% end %>
+
+<!-- 引入 Bootstrap 類別，讓 View new & edit 更進化 -->
+<div class="form container">
+  <%= form_for @task do |f| %>
+
+    <div class="form-group"> 
+      <%= f.label :name, "Name" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group"> 
+      <%= f.label :date, "Due Date" %>
+      <%= f.text_field :date, class: "form-control" %>
+    </div>
+
+    <div class="form-group"> 
+      <%= f.label :note, "Note" %>
+      <%= f.text_area :note, class: "form-control" %>
+    </div>
+
+    <%= f.submit %>
+  <% end %>
+</div>
+<br />
+<div class="container form-group">
+  <%= link_to "<span class='glyphicon glyphicon-home'></span>  Back to Home Page".html_safe, tasks_path, class: "btn btn-primary" %>
+</div>
